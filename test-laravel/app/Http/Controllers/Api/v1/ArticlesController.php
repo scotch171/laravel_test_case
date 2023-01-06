@@ -22,7 +22,7 @@ class ArticlesController extends Controller
      */
     public function index(Request $request)
     {
-        $articles = DB::table('articles')->orderBy('created_at')->cursorPaginate($request->get('count'));
+        $articles = DB::table('articles')->orderBy('created_at')->paginate($request->get('count'));
 
         if (!$articles) {
             return response([
