@@ -20,14 +20,42 @@ export default {
                 {
                     title: 'Main page',
                     href: '/',
+                    active: false,
                 },
                 {
                     title: 'Articles',
                     href: '/articles',
+                    active: false,
                 }
             ]
         }
     },
+    methods: {
+        setActiveLink() {
+            const path = window.location.pathname;
+
+            let maxDeep = 0;
+            let tempDeep = 0;
+            let linkIndex = 0;
+
+            this.links.forEach((link, index) => {
+                tempDeep = this.getHrefDeep(link.href)
+                if (path.includes(link.href) && tempDeep > maxDeep) {
+                    maxDeep = tempDeep;
+                    linkIndex = index;
+                }
+            });
+            this.links[linkIndex].active = true;
+        },
+
+        getHrefDeep(href) {
+            return href.split('/').filter(element => element !== '').length
+        }
+    },
+
+    mounted() {
+        this.setActiveLink();
+    }
 }
 </script>
 
