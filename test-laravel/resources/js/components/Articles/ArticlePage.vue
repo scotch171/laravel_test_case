@@ -1,8 +1,6 @@
 <template>
-
     <div>
         <spinner v-if="loading" />
-
         <div class="article px-4 py-5 my-5 text-center" v-else>
             <div class="article-header">
                 <h1>{{ header }}</h1>
@@ -47,8 +45,8 @@ export default {
     mounted() {
         this.fetchData();
 
-
-
+        let chanel = Echo.channel('article-chanel.' + this.id);
+        chanel.listen('ArticleAction', data => this.likes = data.likes);
     },
     methods: {
         async fetchData() {
@@ -68,16 +66,12 @@ export default {
             })
         },
 
-        async changeLikes(){
+        changeLikes(){
             this.like = !this.like;
 
-            const res = await axios.put('api/articles/' + this.id, {
-                params: {
-                    type: this.like ? 'like-increment' : 'like-decrement',
-                }
+             axios.post('/api/articles/' + this.id +'/act', {
+                action: this.like ? 'like-increment' : 'like-decrement',
             });
-
-            this.like = res.data.likes;
         }
     }
 }

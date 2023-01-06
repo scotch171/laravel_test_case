@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('articles', ArticlesController::class);
+Route::post('/articles/{id}/act', [ArticlesController::class, 'action']);

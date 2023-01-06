@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Events\ArticleAction;
 use App\Http\Controllers\Controller;
+use App\Models\Article;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ArticlesController extends Controller
 {
@@ -60,8 +64,7 @@ class ArticlesController extends Controller
      */
     public function show(int $id)
     {
-
-        $article = Db::table('articles')->where('id', $id)->first();
+        $article = Article::whereId($id)->first();
 
         if (!$article) {
             // TODO: make catch
@@ -92,17 +95,7 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $article = Db::table('articles')->where('id', $id)->first();
-
-
-        if (!$article) {
-            // TODO: make catch
-        }
-
-        switch ($request->get('type')) {
-            case self::L_DECRIMENT:
-//                $article->likes
-        }
+        //
     }
 
     public function changeLikes(Request $request, $id)
@@ -118,6 +111,33 @@ class ArticlesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return response();
+    }
+
+
+    /**
+     * @param Request $request
+     * @param int $id
+     */
+    public function action(Request $request, int $id)
+    {
+        $action = $request->get('action');
+
+        /** @var Article $article */
+        $article = Article::whereId($id)->first();
+
+        switch ($action) {
+            case self::L_INCREMENT:
+                $article->likes++;
+                break;
+            case self::L_DECRIMENT:
+                $article->likes--;
+                break;
+        }
+
+        event(new ArticleAction($id, $article->likes));
+        $article->save();
+
+        return '';
     }
 }
