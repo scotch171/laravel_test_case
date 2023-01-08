@@ -5,6 +5,7 @@
 
             <div class="card-body">
                 <p class="card-text">{{ header }}</p>
+                <div class="article-text">{{text}}</div>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                         <a :href="'/articles/' + id"
@@ -42,10 +43,18 @@ export default {
             type: String,
             required: true,
         },
+        text: {
+            type: String,
+            required: true,
+        }
     }
 }
 </script>
 
 <style scoped>
-
+    .article-text {
+        height: 50px;
+        overflow: hidden;
+        margin: 10px 0;
+    }
 </style>

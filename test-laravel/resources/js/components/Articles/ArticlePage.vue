@@ -15,6 +15,7 @@
                 <div @click="changeLikes()" class="likes"><i :class="like ? 'bi-heart-fill' : 'bi-heart'"  class="bi "></i><div>{{ likes }}</div></div>
                 <div class="viewes"><i class="bi bi-eye"></i><div>{{ view }}</div></div>
             </div>
+            <article-tags :id="id" />
         </div>
     </div>
 </template>
@@ -22,11 +23,13 @@
 <script>
 import axios from "axios";
 import spinner from "../Spinner";
+import ArticleTags from "./ArticleTags";
 
 export default {
     name: "ArticlePage",
     components: {
         spinner,
+        ArticleTags
     },
 
     data:() => ({

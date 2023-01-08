@@ -15,7 +15,7 @@ class ArticleFactory extends Factory
     {
         return [
             'header' => $this->faker->name,
-            'text' => $this->faker->text,
+            'text' => $this->faker->realText(2500),
             'view' => $this->faker->randomNumber(),
             'likes' => $this->faker->randomNumber(),
             'created_at' => now(),

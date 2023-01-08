@@ -48,5 +48,19 @@ class Article extends Model
         return $this->likes;
     }
 
+    public function articleTagReference()
+    {
+        return $this->hasMany(ArticleTagReference::class);
+    }
 
+    public function getTags()
+    {
+        $result = [];
+
+        foreach ($this->articleTagReference as $articleTagReference) {
+            $result[] = $articleTagReference->tag;
+        }
+
+        return $result;
+    }
 }

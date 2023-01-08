@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\v1\ArticlesController;
+use App\Http\Controllers\Api\v1\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('articles', ArticlesController::class);
+Route::resource('tags', TagController::class);
+
+Route::get('/tags/getAllForArticle/{id}', [TagController::class, 'getAllForArticle']);
 Route::post('/articles/{id}/act', [ArticlesController::class, 'action']);

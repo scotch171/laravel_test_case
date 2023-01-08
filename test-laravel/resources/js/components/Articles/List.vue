@@ -11,6 +11,7 @@
                         :created_at="article.created_at"
                         :view="article.view"
                         :likes="article.likes"
+                        :text="article.text"
                     />
                 </div>
 
