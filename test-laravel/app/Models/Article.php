@@ -21,6 +21,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property ArticleTagReference[] $articleTagReference
+ * @property ArticleComment[] $comments
  * @method static ArticleFactory factory(...$parameters)
  * @method static Builder|Article newModelQuery()
  * @method static Builder|Article newQuery()
@@ -57,6 +58,11 @@ class Article extends Model
     public function articleTagReference(): HasMany
     {
         return $this->hasMany(ArticleTagReference::class);
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(ArticleComment::class);
     }
 
     public function getTags(): array

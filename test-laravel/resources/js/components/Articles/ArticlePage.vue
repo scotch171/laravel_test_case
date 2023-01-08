@@ -2,20 +2,24 @@
     <div>
         <spinner v-if="loading" />
         <div class="article px-4 py-5 my-5 text-center" v-else>
-            <div class="article-header">
-                <h1>{{ header }}</h1>
-            </div>
-            <div class="article-body lead mb-4">
-                <p>
-                    {{ text }}
-                </p>
+            <div class="card mb-4">
+                <div class="article-header">
+                    <h1>{{ header }}</h1>
+                </div>
+                <div class="article-body lead mb-4">
+                    <p>
+                        {{ text }}
+                    </p>
+                </div>
+
+                <div class="article-footer">
+                    <div @click="changeLikes()" class="likes"><i :class="like ? 'bi-heart-fill' : 'bi-heart'"  class="bi "></i><div>{{ likes }}</div></div>
+                    <div class="viewes"><i class="bi bi-eye"></i><div>{{ view }}</div></div>
+                </div>
             </div>
 
-            <div class="article-footer">
-                <div @click="changeLikes()" class="likes"><i :class="like ? 'bi-heart-fill' : 'bi-heart'"  class="bi "></i><div>{{ likes }}</div></div>
-                <div class="viewes"><i class="bi bi-eye"></i><div>{{ view }}</div></div>
-            </div>
             <article-tags :id="id" />
+            <article-comment :id="id" />
         </div>
     </div>
 </template>
@@ -24,10 +28,12 @@
 import axios from "axios";
 import spinner from "../Spinner";
 import ArticleTags from "./ArticleTags";
+import ArticleComment from "./ArticleComment";
 
 export default {
     name: "ArticlePage",
     components: {
+        ArticleComment,
         spinner,
         ArticleTags
     },

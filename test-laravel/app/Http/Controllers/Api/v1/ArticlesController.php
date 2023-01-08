@@ -6,7 +6,10 @@ use App\Events\ArticleAction;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -138,4 +141,15 @@ class ArticlesController extends Controller
 
         return '';
     }
+
+    public function getTags(int $id): Response|Application|ResponseFactory
+    {
+        return response(Article::whereId($id)->first()->getTags());
+    }
+
+    public function getComments(int $id): Response|Application|ResponseFactory
+    {
+        return response(Article::whereId($id)->first()->comments);
+    }
+
 }

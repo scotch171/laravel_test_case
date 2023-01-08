@@ -1,9 +1,10 @@
 <template>
     <div>
         <spinner v-if="loading" />
-        <div v-else>
-            <h3>Tags</h3>
+        <div v-else class="card mb-4">
             <div class="article-tags-body">
+                <h3>Tags</h3>
+
                 <span v-for="tag in tags" class="badge text-bg-primary">
                     <a :href="'/tags/' + tag.id">
                         {{ tag.label }}
@@ -39,7 +40,7 @@ export default {
     },
     methods: {
         fetchData() {
-            axios.get('/api/tags/getAllForArticle/' + this.id).then((res) =>
+            axios.get('/api/articles/' + this.id + '/getTags').then((res) =>
             {
                 res.data.forEach((tag, index)=> {
                     this.$set(this.tags, index, tag);
@@ -54,10 +55,14 @@ export default {
 <style scoped>
     .article-tags-body span {
         margin: 10px;
+        padding: 10px;
     }
     .article-tags-body span a {
         font-size: 16px;
         color: white;
         text-decoration: none;
+    }
+    .article-tags-body {
+        padding: 20px;
     }
 </style>
