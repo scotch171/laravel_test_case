@@ -66,9 +66,7 @@ class ArticlesController extends Controller
     {
         $article = Article::whereId($id)->first();
 
-        if (!$article) {
-            // TODO: make catch
-        }
+        $article->increment('view');
 
         return response([
             'article' => $article

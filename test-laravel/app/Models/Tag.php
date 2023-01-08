@@ -4,7 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property ArticleTagReference[] $articleTagReference
+ */
 class Tag extends Model
 {
     use HasFactory;
@@ -13,7 +17,7 @@ class Tag extends Model
     public $timestamps = false;
 
 
-    public function articleTagReference()
+    public function articleTagReference(): HasMany
     {
         return $this->hasMany(ArticleTagReference::class);
     }

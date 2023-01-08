@@ -2,8 +2,13 @@
 
 namespace App\Models;
 
+use Database\Factories\ArticleFactory;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Article
@@ -13,20 +18,21 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $text
  * @property int $view
  * @property int $likes
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Database\Factories\ArticleFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|Article newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Article newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Article query()
- * @method static \Illuminate\Database\Eloquent\Builder|Article whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Article whereHeader($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Article whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Article whereLikes($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Article whereText($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Article whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Article whereView($value)
- * @mixin \Eloquent
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property ArticleTagReference[] $articleTagReference
+ * @method static ArticleFactory factory(...$parameters)
+ * @method static Builder|Article newModelQuery()
+ * @method static Builder|Article newQuery()
+ * @method static Builder|Article query()
+ * @method static Builder|Article whereCreatedAt($value)
+ * @method static Builder|Article whereHeader($value)
+ * @method static Builder|Article whereId($value)
+ * @method static Builder|Article whereLikes($value)
+ * @method static Builder|Article whereText($value)
+ * @method static Builder|Article whereUpdatedAt($value)
+ * @method static Builder|Article whereView($value)
+ * @mixin Eloquent
  */
 class Article extends Model
 {
@@ -48,12 +54,12 @@ class Article extends Model
         return $this->likes;
     }
 
-    public function articleTagReference()
+    public function articleTagReference(): HasMany
     {
         return $this->hasMany(ArticleTagReference::class);
     }
 
-    public function getTags()
+    public function getTags(): array
     {
         $result = [];
 
