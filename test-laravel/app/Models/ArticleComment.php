@@ -13,4 +13,8 @@ use Illuminate\Database\Eloquent\Model;
 class ArticleComment extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'article_id', 'user_name', 'text'
+    ];
 }

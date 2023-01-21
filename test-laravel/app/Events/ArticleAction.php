@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Models\Article;
+use App\Models\ArticleComment;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -24,7 +25,7 @@ class ArticleAction implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(int $articleId, int $likes)
+    public function  __construct(int $articleId, int $likes)
     {
         $this->articleId = $articleId;
         $this->likes = $likes;
@@ -43,6 +44,7 @@ class ArticleAction implements ShouldBroadcast
     public function join()
     {
         return true;
+
     }
 
 }

@@ -18,8 +18,8 @@
             <div class="card mb-4" v-for="comment in comments">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <div class="d-flex flex-row align-items-center">
-                            <p class="small mb-0 ms-2">{{ comment.user_name }}</p>
+                        <div class="d-flex flex-row">
+                            <p class="small mb-0">{{ comment.user_name }}</p>
                         </div>
                     </div>
                     <p>
@@ -69,10 +69,14 @@ export default {
         addComment() {
             this.sendForm = true;
             this.formData.articleId = this.id;
-            axios.post('/api/article-comments',this.formData).then((res) => {
-                this.$set(this.comments, this.comments.length, res.data)
-                this.sendForm = false;
+            axios.post('/api/article-comments',this.formData);
+
+            this.$set(this.comments, this.comments.length, {
+                user_name: this.formData.userName,
+                text: this.formData.text
             });
+            this.formData.text = '';
+            this.sendForm = false;
         }
     }
 }
