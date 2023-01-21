@@ -49,10 +49,17 @@ export default {
     props: {
         id: {
             type: Number,
+        },
+        json: {
+            type: Object
         }
     },
     mounted() {
-        this.fetchData();
+        if (this.json) {
+            this.setData(this.json)
+        } else {
+            this.fetchData();
+        }
 
         let chanel = Echo.channel('article-chanel.' + this.id);
         chanel.listen('ArticleAction', data => this.likes = data.likes);
@@ -62,17 +69,18 @@ export default {
             axios.get('/api/articles/' + this.id)
             .then(res => {
                 if (res.status === 200) {
-                    const article = res.data.article
-
-                    this.header =  article.header;
-                    this.text = article.text;
-                    this.likes = article.likes;
-                    this.view = article.view
-
-                    this.loading = false;
-
+                    this.setData(res.data.article);
                 }
             })
+        },
+
+        setData(obj) {
+            this.header =  obj.header;
+            this.text = obj.text;
+            this.likes = obj.likes;
+            this.view = obj.view
+
+            this.loading = false;
         },
 
         changeLikes(){

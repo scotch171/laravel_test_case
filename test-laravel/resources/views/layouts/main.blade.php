@@ -6,8 +6,9 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{ URL::asset('/img/favicon.png') }}" type="image/x-icon"/>
 
-{{--    <title>{{ config('app.name', 'Laravel') }}</title>--}}
+    <title>@yield('title')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

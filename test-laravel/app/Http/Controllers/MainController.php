@@ -8,9 +8,4 @@ class MainController extends Controller
     {
         return view('index');
     }
-
-    public function articles()
-    {
-        return view('articles');
-    }
 }

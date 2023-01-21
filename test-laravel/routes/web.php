@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\MainController;
-use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +16,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [MainController::class, 'index']);
-Route::get('/articles', [MainController::class, 'articles']);
-Route::get('/articles/{id}', function ($id) {
-    return view('article', ['id' => $id]);
-});
+Route::resource('articles', ArticlesController::class);
