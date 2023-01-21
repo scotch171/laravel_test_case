@@ -3,7 +3,7 @@ Test task from https://gist.github.com/smskin/aa39833f9d57f9e96899c8b065057eb7
 
 Using Laradock, Vue 2, Laravel 8
 
-Done only what is required in the test task. There are some things that I would also implement
+Only implemented what is required in the test task. There are some things that I would also implement
 
 # Roadmap:
     1) Authorization
@@ -11,7 +11,7 @@ Done only what is required in the test task. There are some things that I would 
     3) Make Rest API
     4) Add tests
 
-# How to work
+# How it work
 Project must be near laradock folder
 
 1) composer install
