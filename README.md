@@ -11,9 +11,17 @@ Done only what is required in the test task. There are some things that I would 
     3) Make Rest API
     4) Add tests
 
-#How to work
+# How to work
+Project must be near laradock folder
+
 1) composer install
 2) npm install
 3) php artisan key:generate
 4) php artisan migrate
 5) php artisan db:seed
+
+To live change likes
+`php artisan queue:listen`
+
+To add comments in the background
+`php artisan queue:work --queue="add-comment"`

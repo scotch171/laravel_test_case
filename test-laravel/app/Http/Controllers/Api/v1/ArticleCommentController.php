@@ -18,8 +18,6 @@ class ArticleCommentController extends Controller
      */
     public function store(Request $request)
     {
-        $a = $request->get('articleId');
-
         CreateCommentJob::dispatch(
             (int)$request->get('articleId'),
             $request->get('userName'),

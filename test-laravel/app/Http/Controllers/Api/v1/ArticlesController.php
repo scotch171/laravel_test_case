@@ -78,7 +78,7 @@ class ArticlesController extends Controller
                 $response['view']= ++$article->view;
         }
 
-        if (in_array($article, [self::L_DECRIMENT, self::L_DECRIMENT], true)) {
+        if (in_array($action, [self::L_INCREMENT, self::L_DECRIMENT], true)) {
             event(new ArticleAction($id, $article->likes));
         }
 
